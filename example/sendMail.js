@@ -4,7 +4,10 @@ const fetch = require('node-fetch');
 const React = require('react');
 const ReactDOMServer = require('react-dom/server');
 
-const Email = require('../lib/Email').default;
+// const Email = require('../lib/Email').default;
+
+const attendeeListProps = require('./dummyProps')
+const AttendeeList = require('../lib/attendeeList').default;
 
 const get404 = (req, res) => {
     res.writeHead(404, {"Content-Type": "text/plain"});
@@ -28,14 +31,20 @@ function getWeatherInMadrid() {
 
 const sendMail = (req, res) => {
 
-    getWeatherInMadrid()
-    .then((weather) => {
-        const emailElement = React.createElement(Email, { data : { weather, city: 'Madrid' } });
-        const content = ReactDOMServer.renderToStaticMarkup(emailElement);
+    const emailElement = React.createElement(AttendeeList, { mode: attendeeListProps.mode, attributes: attendeeListProps.attributes});
+    const content = ReactDOMServer.renderToStaticMarkup(emailElement);
+    
+    res.writeHead(200, {"Content-Type": "text/html"});
+    res.end(content);
+
+    // getWeatherInMadrid()
+    // .then((weather) => {
+    //     const emailElement = React.createElement(Email, { data : { weather, city: 'Madrid' } });
+    //     const content = ReactDOMServer.renderToStaticMarkup(emailElement);
         
-        res.writeHead(200, {"Content-Type": "text/html"});
-        res.end(content);
-    })
+    //     res.writeHead(200, {"Content-Type": "text/html"});
+    //     res.end(content);
+    // })
 }
 
 http.createServer(function(req, res) {

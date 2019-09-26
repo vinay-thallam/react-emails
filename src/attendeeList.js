@@ -3,12 +3,7 @@ import DataDrop from './dataDrop'
 
 export default function AttendeeList ({
   mode,
-  attributes: {
-    heading,
-    attendee_line_1,
-    attendee_line_2,
-    attendee_line_3
-  }
+  attributes
 }) {
   return (
     <table 
@@ -49,7 +44,7 @@ export default function AttendeeList ({
                     padding: '0 0 16px',
                     letterSpacing: '1px'
                   }}
-                >{heading}</th>
+                >{attributes.heading}</th>
               </tr>
             </thead>
             <tbody>
@@ -72,7 +67,7 @@ export default function AttendeeList ({
                           lineHeight: '13px'
                         }}
                       >
-                        {attendee_line_1.map(value => <DataDrop key={value} value={value} />)}
+                        {attributes.attendee_line_1.map(value => <DataDrop key={value} value={value} />)}
                       </td>
                     </tr>
                     <tr>
@@ -92,7 +87,7 @@ export default function AttendeeList ({
                               textDecoration: 'none'
                             }}
                           >
-                            {attendee_line_2.map(value => <DataDrop key={value} value={value} />)}
+                            {attributes.attendee_line_2.map(value => <DataDrop key={value} value={value} />)}
                           </a>
                       </td>
                     </tr>
@@ -106,7 +101,7 @@ export default function AttendeeList ({
                           padding: '0 0 16px',
                         }}
                       >
-                        {attendee_line_3.map(value => <DataDrop key={value} value={value} />)}
+                        {attributes.attendee_line_3.map(value => <DataDrop key={value} value={value} />)}
                       </td>
                     </tr>
                   </table>
